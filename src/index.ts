@@ -1,8 +1,13 @@
-const world = 'world';
+const axios = require('axios');
 
-export function hello(who: string = world): string {
-    return `Hello ${who}! `;
+async function scrapeSite(category: string) {
+	const url = `https://jobs.dou.ua/vacancies/?category=${category}`;
+	const { data } = await axios.get(url);
+	return data
 }
 
-console.log("Hello!");
-debugger;
+const keyword = ".NET";
+
+scrapeSite(keyword).then(result => {
+	console.log(result)
+}).catch(err => console.log(err));
